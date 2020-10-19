@@ -1,0 +1,15 @@
+{
+  "audioConfig": {
+    "audioEncoding": "LINEAR16",
+    "pitch": 0,
+    "speakingRate": 1
+  },
+  "input": {
+    "text": ""
+  },
+  "voice": {
+    "languageCode": "fr-FR",
+    "name": "fr-FR-Wavenet-B"
+  },
+  "outputFileName":"output.mp3"
+}
