@@ -19,6 +19,7 @@
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
-    "nodemon": "^2.0.5"
+    "nodemon": "^2.0.5",
+    "random-meow": "^3.6.1"
   }
 }

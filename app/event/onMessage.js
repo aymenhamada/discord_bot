@@ -41,7 +41,7 @@ export default (msg) => {
             channel: msg.channel
         });
     } else {
-        console.log('handler not found');
+        console.log('handler not found', msg.content);
     }
 
 }
