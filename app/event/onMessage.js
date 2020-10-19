@@ -27,7 +27,19 @@ export default (msg) => {
 
     const command = commands.find((c) => c.name === wordtab[1]);
     if (command && command.handler) {
-        command.handler.default(msg, msg.content.substr(3 + command.name.length, msg.content.length));
+        const guild = msg.guild;
+        const user = msg.member.user;
+        const voiceState = guild.voiceStates.resolve(user.id)
+        const voiceChannel = voiceState ? voiceState.channel : null;
+
+        command.handler.default({
+            msg,
+            text: msg.content.substr(3 + command.name.length, msg.content.length),
+            guild,
+            user,
+            voiceChannel,
+            channel: msg.channel
+        });
     } else {
         console.log('handler not found');
     }
