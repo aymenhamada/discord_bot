@@ -1,4 +1,6 @@
 import fs from "fs";
+import client from '../service/client.js';
+import state from '../state/state.js';
 
 const commands = [];
 
@@ -18,6 +20,12 @@ fs.readdir(`./app/commands/`, function (err, files) {
 
 export default (msg) => {
 
+    if(msg.author.id === client.user.id) return;
+
+    if (msg.content.includes('weber') && Math.random() >= 0.8) {
+        return msg.channel.send('oh non pas pas le grand vilain victor weber');
+    }
+
     if (msg.content.length === 0 || !msg.content.startsWith('!p')) return;
 
     const wordtab = msg.content.split(' ');
@@ -26,6 +34,11 @@ export default (msg) => {
     }
 
     const command = commands.find((c) => c.name === wordtab[1]);
+
+    if (state.sleeping && command.name !== 'debout') {
+        return msg.reply('mais laisse moi dormir zebi');
+    }
+
     if (command && command.handler) {
         const guild = msg.guild;
         const user = msg.member ? msg.member.user : null;

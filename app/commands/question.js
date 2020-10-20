@@ -1,4 +1,5 @@
 import {getQuestion} from '../service/question.js';
+import state from '../state/state.js';
 
 export default async ({channel}) => {
     const question = await getQuestion();
@@ -26,12 +27,26 @@ export default async ({channel}) => {
         const winners = [];
 
         result.users.cache.filter(u => u.username !== 'Pedrito').forEach((u) => {
-            winners.push(u.username);
+            winners.push(u);
         })
 
         if (winners.length > 0) {
             let text = 'Winners: ';
-            winners.forEach(u => text += u + ' ')
+            winners.forEach(u => {
+                text += u.username + ' ';
+                let score = state.question.scores.find(s => s.id === u.id);
+                if (score === undefined) {
+                    score = {
+                        id: u.id,
+                        name: u.username,
+                        points: 1
+                    }
+                    state.question.scores.push(score);
+                } else {
+                    score.points += 1;
+                }
+            })
+
             channel.send(text);
         }
 

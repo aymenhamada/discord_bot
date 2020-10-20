@@ -1,4 +1,5 @@
 import { Text2Speech } from '../service/tts.js';
+import ytdl from 'ytdl-core-discord';
 
 export default async ({msg, text, voiceChannel, guild}) => {
 
@@ -13,10 +14,11 @@ export default async ({msg, text, voiceChannel, guild}) => {
         return msg.reply('On dirait que tu as oublié de mettre du text gros bg');
     }
 
+
     await Text2Speech(text);
 
-    voiceChannel.join().then((connection) => {
-        connection.play('./output.mp3').on('finish', () => {
+    voiceChannel.join().then( async (connection) => {
+        connection.play(await ytdl(text), { type: 'opus' }).on('finish', () => {
             voiceChannel.leave();
         });
     });
