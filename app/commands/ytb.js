@@ -18,7 +18,7 @@ export default async ({msg, text, voiceChannel, guild}) => {
     await Text2Speech(text);
 
     voiceChannel.join().then( async (connection) => {
-        connection.play(await ytdl(text), { type: 'opus' }).on('finish', () => {
+        connection.play(await ytdl(text), {volume: 0.1, type: 'opus' }).on('finish', () => {
             voiceChannel.leave();
         });
     });

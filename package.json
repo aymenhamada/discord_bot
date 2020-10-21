@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon node"
+    "dev": "nodemon node",
+    "lint": "eslint --ext .js app/"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +24,8 @@
     "nodemon": "^2.0.5",
     "random-meow": "^3.6.1",
     "ytdl-core-discord": "^1.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.11.0"
   }
 }
