@@ -8,7 +8,4 @@ client.login(process.env.DISCORD_TOKEN);
 client.on('ready', onReady);
 client.on('message', onMessage);
 
-// interval
-
-import intervals from './builder/intervalBuilder.js';
 
