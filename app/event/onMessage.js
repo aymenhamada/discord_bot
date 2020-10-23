@@ -17,7 +17,12 @@ export default (msg) => {
         return msg.reply("T'as oublié de mettre une commande.");
     }
 
-    const command = commands.find((c) => c.name === wordtab[1]);
+    const command = commands.find((c) => {
+        if (c.subCommand !== undefined) {
+            return c.name === wordtab[1] && c.subCommand === wordtab[2];
+        }
+        return c.name === wordtab[1]
+    });
 
     if (command && command.handler) {
         const guild = msg.guild;
