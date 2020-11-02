@@ -1,9 +1,10 @@
-import state from '../state/state.js';
+import User from '../models/user.js';
 
 export default async ({channel}) => {
     channel.send('### TOP 5 ###');
-    state.question.scores.slice(0, 5).forEach((score, index) => {
-        channel.send('#' + (index + 1) + ': ' + score.name + ' -> ' + score.points + ' points.');
+    const users = await User.find().sort({questionPoints: -1}).limit(5);
+    users.forEach((user, index) => {
+        channel.send('#' + (index + 1) + ': ' + user.username + ' -> ' + user.questionPoints + ' points.');
     });
 
 }

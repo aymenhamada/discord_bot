@@ -22,6 +22,7 @@
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
     "fluent-ffmpeg": "2.1.2",
+    "mongoose": "^5.10.11",
     "nodemon": "^2.0.5",
     "random-meow": "^3.6.1",
     "ytdl-core-discord": "^1.2.3"

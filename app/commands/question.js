@@ -1,5 +1,6 @@
 import {getQuestion} from '../service/question.js';
 import state from '../state/state.js';
+import User from '../models/user.js';
 
 export default async ({channel}) => {
     const question = await getQuestion();
@@ -32,23 +33,16 @@ export default async ({channel}) => {
 
         if (winners.length > 0) {
             let text = 'Winners: ';
-            winners.forEach(u => {
+            for (const u of winners) {
                 text += u.username + ' ';
-                let score = state.question.scores.find(s => s.id === u.id);
-                if (score === undefined) {
-                    score = {
-                        id: u.id,
-                        name: u.username,
-                        points: 1
-                    }
-                    state.question.scores.push(score);
-                } else {
-                    score.points += 1;
-                }
-            })
+                await User.updateOne({id: u.id}, {
+                    username: u.username,
+                    $inc: { questionPoints: 1 }
+                }, {upsert: true, setDefaultsOnInsert: true});
+            }
 
             channel.send(text);
         }
 
-    }, 15000);
+    }, 5000);
 }
