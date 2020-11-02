@@ -18,8 +18,8 @@ export default (msg) => {
     }
 
     const command = commands.find((c) => {
-        if (c.subCommand !== undefined) {
-            return c.name === wordtab[1] && c.subCommand === wordtab[2];
+        if (c.parent.length > 0 && c.parent.toString() === wordtab.slice(1, wordtab.length - 1).toString()) {
+            return c.name === wordtab[wordtab.length - 1];
         }
         return c.name === wordtab[1]
     });

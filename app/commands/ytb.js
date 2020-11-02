@@ -26,7 +26,9 @@ export default  async function playYoutube({msg, text, voiceChannel, guild}) {
 
     voiceChannel.join().then( async (connection) => {
         // state.isPlayingMedia = true;
-        createDispatcher(connection, await ytdl(text), {type: 'opus' });
+        const url = text.trim();
+        console.log(url);
+        createDispatcher(connection, await ytdl(url), {type: 'opus' });
         dispatcher.on('finish', () => {
             voiceChannel.leave();
             state.isPlayingMedia = false;

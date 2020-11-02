@@ -2,33 +2,28 @@ import fs from "fs";
 
 const commands = [];
 
-fs.readdir(`./app/commands/`, function (err, files) {
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    }
-    files.forEach(function (file) {
-        if(file.substr(file.length - 3) !== '.js') {
-            fs.readdir(`./app/commands/${file}`, function (e, folder) {
-                folder.forEach(f => {
-                    import('../commands/' + file + '/' + f).then(command => {
-                        commands.push({
-                            name: file,
-                            subCommand: f.substr(0, f.length - 3),
-                            handler: command
-                        });
-                    })
-                })
-            });
-        } else {
-                import('../commands/' + file).then(command => {
+function createlinkRecursive(parent = []) {
+    fs.readdir(`./app/commands/${parent.join('/')}`, function (err, files) {
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        }
+        files.forEach(function (file) {
+            if(file.substr(file.length - 3) !== '.js') {
+                createlinkRecursive([...parent, file])
+            }
+            else {
+                import('../commands/' + parent.join('/') + (parent.length > 0 ? '/' : '') + file).then(command => {
                     commands.push({
-                        name: file.substr(0, file.length - 3),
+                        parent: file === 'index.js' && parent.length > 1 ? parent.slice(parent.length - 2, 1) : parent,
+                        name: file === 'index.js' && parent.length > 1 ? parent[parent.length - 1] : file.substr(0, file.length - 3),
                         handler: command
                     });
                 })
-        }
+            }
+        });
     });
-});
+}
 
+createlinkRecursive();
 
 export default commands;
