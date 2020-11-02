@@ -44,5 +44,5 @@ export default async ({channel}) => {
             channel.send(text);
         }
 
-    }, 5000);
+    }, 15000);
 }

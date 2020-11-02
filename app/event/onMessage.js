@@ -44,14 +44,19 @@ export default (msg) => {
 
         if (skip) return;
 
-        command.handler.default({
-            msg,
-            text: msg.content.substr(3 + command.name.length, msg.content.length),
-            guild,
-            user,
-            voiceChannel,
-            channel: msg.channel
-        });
+        try {
+            command.handler.default({
+                msg,
+                text: msg.content.substr(3 + command.name.length, msg.content.length),
+                guild,
+                user,
+                voiceChannel,
+                channel: msg.channel
+            });
+        } catch (e) {
+            console.log(`error on handler ${command.name}:`, e);
+        }
+
     } else {
         console.log('handler not found', msg.content);
         // msg.member.user.send(
