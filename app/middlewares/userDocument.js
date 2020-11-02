@@ -5,10 +5,11 @@ import User from '../models/user.js';
  * stop: function to skip the command
  */
 export default {
-    middleware: async (msg, next) => {
+    middleware: async (msg, stop) => {
         const user = await User.findOne({id: msg.member.id});
         if (user === undefined) {
-            return;
+            msg.reply("I didn't find you in the database.")
+            stop();
         }
         return {userDocument: user};
     },
