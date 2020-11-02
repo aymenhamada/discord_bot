@@ -29,34 +29,31 @@ export default (msg) => {
         const user = msg.member ? msg.member.user : null;
         const voiceState = user ? guild.voiceStates.resolve(user.id) : null;
         const voiceChannel = voiceState ? voiceState.channel : null;
-        let skip = false;
+        let data = { };
 
         middlewares.forEach(m => {
             if (m.default.commands.length === 0 || m.default.commands.find(i => i === command.handler.default)) {
                 const avoid = m.default.avoid.find(a => a === command.handler.default);
                 if (avoid === undefined) {
-                    m.default.middleware(msg, () => {
-                        skip = true;
+                    m.default.middleware(msg, (mdData) => {
+                        data = {...data, ...mdData};
+                        try {
+                            command.handler.default({
+                                msg,
+                                text: msg.content.substr(3 + command.name.length, msg.content.length),
+                                guild,
+                                user,
+                                voiceChannel,
+                                channel: msg.channel,
+                                ...data
+                            });
+                        } catch (e) {
+                            console.log(`error on handler ${command.name}:`, e);
+                        }
                     });
                 }
             }
         });
-
-        if (skip) return;
-
-        try {
-            command.handler.default({
-                msg,
-                text: msg.content.substr(3 + command.name.length, msg.content.length),
-                guild,
-                user,
-                voiceChannel,
-                channel: msg.channel
-            });
-        } catch (e) {
-            console.log(`error on handler ${command.name}:`, e);
-        }
-
     } else {
         console.log('handler not found', msg.content);
         // msg.member.user.send(

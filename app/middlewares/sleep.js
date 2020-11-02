@@ -6,11 +6,12 @@ import Debout from '../commands/debout.js';
  * stop: function to skip the command
  */
 export default {
-    middleware: (msg, stop) => {
+    middleware: (msg, next) => {
         if (state.sleeping) {
             msg.reply('mais laisse moi dormir zebi');
-            stop();
+            return;
         }
+        next();
     },
     commands: [], // if empty, apply to all commands
     avoid: [Debout] // exceptions

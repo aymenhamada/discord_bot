@@ -1,6 +1,6 @@
-import {getQuestion} from '../service/question.js';
-import state from '../state/state.js';
-import User from '../models/user.js';
+import {getQuestion} from '../../service/question.js';
+import state from '../../state/state.js';
+import User from '../../models/user.js';
 
 export default async ({channel}) => {
     const question = await getQuestion();
