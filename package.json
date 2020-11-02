@@ -14,20 +14,20 @@
   "type": "module",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/opus": "^0.3.2",
+    "@discordjs/opus": "^0.3.3",
     "@google-cloud/text-to-speech": "^3.1.1",
     "axios": "^0.20.0",
     "blague.xyz": "^2.0.4",
-    "discord.js": "^12.3.1",
+    "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
     "fluent-ffmpeg": "2.1.2",
     "mongoose": "^5.10.11",
-    "nodemon": "^2.0.5",
-    "random-meow": "^3.6.1",
-    "ytdl-core-discord": "^1.2.3"
+    "nodemon": "^2.0.6",
+    "random-meow": "^3.9.0",
+    "ytdl-core-discord": "^1.2.4"
   },
   "devDependencies": {
-    "eslint": "^7.11.0"
+    "eslint": "^7.12.1"
   }
 }
