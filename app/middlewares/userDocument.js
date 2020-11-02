@@ -10,7 +10,7 @@ export default {
         if (user === undefined) {
             return;
         }
-        next({userDocument: user});
+        return {userDocument: user};
     },
     commands: [], // if empty, apply to all commands
     avoid: [] // exceptions

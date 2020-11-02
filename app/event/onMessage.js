@@ -2,7 +2,7 @@ import client from '../service/client.js';
 import commands from '../builder/commandBuilder.js';
 import middlewares from "../builder/middlewareBuilder.js";
 
-export default (msg) => {
+export default async (msg) => {
 
     if (msg.author.id === client.user.id) return;
 
@@ -32,20 +32,17 @@ export default (msg) => {
         let skip = false;
         let data = { };
 
-        middlewares.forEach(m => {
+        for (const m of middlewares) {
             if (m.default.commands.length === 0 || m.default.commands.find(i => i === command.handler.default)) {
                 const avoid = m.default.avoid.find(a => a === command.handler.default);
                 if (avoid === undefined) {
-                    m.default.middleware(msg, () => {
+                    const mdData = await m.default.middleware(msg, () => {
                         skip = true;
-                    }, (mdData) => {
-                        data = {...data, ...mdData};
                     });
+                    data = {...data, ...mdData};
                 }
             }
-        });
-
-        console.log(data);
+        }
 
         if (skip) return;
 
