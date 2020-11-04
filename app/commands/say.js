@@ -1,5 +1,6 @@
 import { Text2Speech } from '../service/tts.js';
 import {createDispatcher, dispatcher} from '../service/displatcher.js';
+import state from '../state/state.js';
 
 export default async ({msg, text, voiceChannel, guild}) => {
 
@@ -17,7 +18,7 @@ export default async ({msg, text, voiceChannel, guild}) => {
     await Text2Speech(text);
 
     voiceChannel.join().then((connection) => {
-        createDispatcher(connection, './output.mp3');
+        createDispatcher(connection, './output.mp3', {volume: state.ttsVolume});
         dispatcher.on('finish', () => {
             voiceChannel.leave();
         });

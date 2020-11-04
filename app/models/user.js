@@ -4,7 +4,7 @@ const User = mongoose.model('User',
     {
         id: String,
         username: String,
-        questionPoints: Number,
+        questionPoints: { type: Number, default: 0},
         money: { type: Number, default: 0},
         slotReset: Date,
     });

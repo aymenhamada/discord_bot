@@ -7,12 +7,12 @@ export default ({msg, text}) => {
     }
 
     if (+text >= 0 && +text <= 1) {
-        state.volume = +text;
-        msg.reply('volume changé à ' + state.volume);
+        state.mediaVolume = +text;
+        msg.reply('volume changé à ' + state.mediaVolume);
         if (dispatcher === undefined) {
             return;
         }
-        dispatcher.setVolume(state.volume);
+        dispatcher.setVolume(state.mediaVolume);
     } else {
         msg.reply('value incorrect');
     }

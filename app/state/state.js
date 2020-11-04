@@ -2,5 +2,6 @@ export default {
     sleeping: false,
     isPlayingMedia: false,
     mediaQueue: [],
-    volume: 0.5
+    mediaVolume: 0.5,
+    ttsVolume: 1,
 };
