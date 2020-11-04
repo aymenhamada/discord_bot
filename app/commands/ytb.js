@@ -8,7 +8,8 @@ export default  async function playYoutube({msg, text, voiceChannel, guild}) {
         const mentionId = msg.mentions.members.first().user.id;
         const voiceState = guild.voiceStates.resolve(mentionId);
         voiceChannel = voiceState ? voiceState.channel : null;
-     }
+        text = text.substr(mentionId.length + 5, text.length);
+    }
 
     if (state.isPlayingMedia) {
         //state.mediaQueue.push({msg, text, voiceChannel, guild});
