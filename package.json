@@ -22,9 +22,11 @@
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
     "fluent-ffmpeg": "2.1.2",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.6",
     "random-meow": "^3.9.0",
+    "slot-machine": "^2.1.0",
     "ytdl-core-discord": "^1.2.4"
   },
   "devDependencies": {
