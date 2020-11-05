@@ -18,7 +18,7 @@ export default async (msg) => {
     }
 
     const command = commands.find((c) => {
-        if (c.parent.length > 0 && c.parent.toString() === wordtab.slice(1, wordtab.length - 1).toString()) {
+        if (c.parent.length > 0 && c.parent.toString() === wordtab.slice(1, wordtab.length === 2 ? 2 : wordtab.length - 1).toString()) {
             return c.name === wordtab[wordtab.length - 1];
         }
         return c.name === wordtab[1]

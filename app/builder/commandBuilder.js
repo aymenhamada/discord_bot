@@ -15,7 +15,7 @@ function createlinkRecursive(parent = []) {
                 import('../commands/' + parent.join('/') + (parent.length > 0 ? '/' : '') + file).then(command => {
                     commands.push({
                         parent: file === 'index.js' && parent.length > 1 ? parent.slice(parent.length - 2, 1) : parent,
-                        name: file === 'index.js' && parent.length > 1 ? parent[parent.length - 1] : file.substr(0, file.length - 3),
+                        name: file === 'index.js' && parent.length >= 1 ? parent[parent.length - 1] : file.substr(0, file.length - 3),
                         handler: command
                     });
                 })

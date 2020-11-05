@@ -32,7 +32,7 @@ export default async ({msg, channel, userDocument}) => {
     let tick = 0;
     let lines = results.lines.map(line => line.symbols.slice(0,3));
     let print = lines.slice(tick, tick + 3);
-    const msgToSend = await channel.send(undefined, new Discord.MessageEmbed()
+    const msgToSend = await channel.send('0$', new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Slot Machine')
         .addField('Result', print, true));
@@ -40,7 +40,7 @@ export default async ({msg, channel, userDocument}) => {
     const turn = setInterval(async () => {
         const current = lines.slice(tick, tick + 3);
         let print = current.map(line => line.map(l => l.display)).join('\n')
-        msgToSend.edit(undefined, new Discord.MessageEmbed()
+        msgToSend.edit('0$', new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Slot Machine')
             .addField('Result', print, true));
