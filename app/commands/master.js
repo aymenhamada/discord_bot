@@ -1,3 +1,3 @@
 export default ({channel}) => {
-    channel.send('Kevin Barroso est mon maitre');
+    channel.send('Aymen Hamada est mon maître absolu, respectez le ou mourrez de mes mains');
 }
